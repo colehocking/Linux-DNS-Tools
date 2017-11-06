@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# This program comments out prepended DNS resolvers so the original may be used.
+# Useful for network debugging; needs sudo
+#       - Cole Hocking
+
+echo "Popping servers. Removing prepended DNS..."
+
+# Comment out the 'prepend nameserver' line in dhclinet.conf 
+sudo sed -e 's/prepend domain-name-servers/#prepend domain-name-servers/g' /etc/dhcp/dhclient.conf -i
+
+# Restart the network manager for changes to take effect
+sudo service network-manager restart
+
+# give the network-manager a couple seconds to restart
+sleep 4
+
+# Make sure it worked
+cat /etc/resolv.conf

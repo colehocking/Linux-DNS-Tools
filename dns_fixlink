@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Fix the broken link that is sometimes caused by updates
+#   - Cole Hocking
+
+sudo ln -nsf ../run/resolvconf/resolv.conf /etc/resolv.conf
